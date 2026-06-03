@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fisher Hill — White Plains, NY in 3D</title>
+<meta name="description" content="An interactive, photorealistic 3D map of the Fisher Hill neighborhood in White Plains, New York.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css">
+<style>
+  :root{ --brand:#d65f22; --ink:#181818; --muted:#6a6a6a; --line:#e8e2dc; --soft:#fff5ef; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{ font-family:"Inter",system-ui,sans-serif; color:var(--ink); background:#fff; }
+
+  /* HERO MAP */
+  .fh-hero{ position:relative; width:100%; height:100vh; min-height:520px; background:#0b0d10; overflow:hidden; }
+  #cesiumContainer{ position:absolute; inset:0; }
+  #cesiumContainer .cesium-viewer, #cesiumContainer .cesium-widget, #cesiumContainer .cesium-widget canvas{ width:100%; height:100%; }
+  .fh-scrim{ position:absolute; inset:0 0 auto 0; height:240px; background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0)); pointer-events:none; z-index:2; }
+
+  .fh-lockup{ position:absolute; left:clamp(18px,4vw,56px); top:clamp(18px,4vw,48px); z-index:3; color:#fff; pointer-events:none;
+    text-shadow:0 2px 20px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.5); }
+  .fh-eyebrow{ display:inline-block; background:var(--brand); color:#fff; font-family:"Inter Tight",sans-serif; font-weight:700;
+    letter-spacing:.13em; text-transform:uppercase; font-size:clamp(10px,1.1vw,12px); padding:5px 11px; margin-bottom:12px; }
+  .fh-title{ margin:0; font-family:"Inter Tight",sans-serif; font-weight:800; line-height:.92; font-size:clamp(2.6rem,8vw,6rem); letter-spacing:-.02em; }
+  .fh-tag{ margin:10px 0 0; max-width:26ch; font-size:clamp(13px,1.4vw,17px); font-weight:500; color:#f2eee9; }
+
+  .fh-hint{ position:absolute; right:clamp(14px,3vw,30px); bottom:clamp(40px,5vw,52px); z-index:3; margin:0; pointer-events:none;
+    font-size:12px; font-weight:600; color:#fff; background:rgba(0,0,0,.42); padding:6px 11px; backdrop-filter:blur(3px); }
+  .fh-nav{ position:absolute; right:clamp(14px,3vw,30px); bottom:clamp(74px,9vw,96px); z-index:4; display:flex; gap:6px; }
+  .fh-nav button{ width:38px; height:38px; cursor:pointer; font-size:17px; line-height:1; color:#fff;
+    background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.28); border-radius:8px; backdrop-filter:blur(3px); }
+  .fh-nav button:hover{ background:rgba(0,0,0,.72); }
+  .fh-nav button:active{ background:var(--brand); border-color:var(--brand); }
+  .fh-scroll{ position:absolute; left:50%; bottom:20px; transform:translateX(-50%); z-index:3; color:#fff; opacity:.85; font-size:11px;
+    letter-spacing:.18em; text-transform:uppercase; pointer-events:none; }
+
+  /* loading + fallback */
+  .fh-loading{ position:absolute; inset:0; z-index:4; display:flex; gap:11px; align-items:center; justify-content:center;
+    background:#0b0d10; color:#fff; font-size:14px; }
+  .fh-loading[hidden]{ display:none; }
+  .fh-spin{ width:18px; height:18px; border:2px solid rgba(255,255,255,.3); border-top-color:var(--brand); border-radius:50%;
+    animation:fhspin .8s linear infinite; }
+  @keyframes fhspin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion:reduce){ .fh-spin{ animation:none; } }
+  .fh-fallback{ position:absolute; inset:0; z-index:4; display:none; place-items:center; padding:24px; background:#101418; }
+  .fh-fallback.show{ display:grid; }
+  .fh-fallback div{ max-width:42ch; text-align:center; color:#e8eef2; font-size:14px; line-height:1.6; }
+  .fh-fallback code{ background:rgba(255,255,255,.1); padding:1px 6px; border-radius:3px; font-family:ui-monospace,Menlo,monospace; }
+
+  /* CONTENT */
+  .fh-wrap{ max-width:880px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,5vw,32px); }
+  .fh-kicker{ color:var(--brand); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:12px; margin:0 0 10px; }
+  .fh-h2{ font-family:"Inter Tight",sans-serif; font-weight:700; font-size:clamp(1.6rem,3.5vw,2.4rem); line-height:1.1; margin:0 0 18px; letter-spacing:-.01em; }
+  .fh-lede{ font-size:clamp(16px,1.9vw,19px); line-height:1.65; color:#2b2b2b; margin:0 0 16px; }
+  .fh-assoc{ margin-top:40px; border:1px solid var(--line); border-left:4px solid var(--brand); background:var(--soft); padding:22px 26px; }
+  .fh-assoc h3{ margin:0 0 4px; font-family:"Inter Tight",sans-serif; font-size:18px; }
+  .fh-assoc p{ margin:0 0 14px; color:var(--muted); font-size:14px; }
+  .fh-assoc ul{ margin:0; padding:0; list-style:none; display:grid; gap:8px; }
+  .fh-assoc li{ font-size:15px; } .fh-assoc li strong{ font-weight:600; }
+  .fh-assoc a{ color:var(--brand); text-decoration:none; } .fh-assoc a:hover{ text-decoration:underline; }
+  .fh-foot{ border-top:1px solid var(--line); padding:26px clamp(20px,5vw,32px); text-align:center; color:var(--muted); font-size:13px; }
+
+  /* Pointer-aware hint + mobile sizing */
+  .fh-m{ display:none; }
+  @media (pointer:coarse){ .fh-d{ display:none; } .fh-m{ display:inline; } }
+  .fh-hero{ height:100dvh; min-height:440px; }
+  .fh-nav button{ touch-action:manipulation; -webkit-user-select:none; user-select:none; }
+  @media (max-width:640px){
+    .fh-hint{ font-size:11px; max-width:74vw; }
+    .fh-nav{ bottom:clamp(70px,16vw,96px); }
+    .fh-nav button{ width:44px; height:44px; font-size:19px; }
+    .fh-tag{ max-width:20ch; }
+  }
+</style>
+</head>
+<body>
+
+<header class="fh-hero">
+  <div id="cesiumContainer" role="application" aria-label="Interactive 3D map of Fisher Hill"></div>
+  <div class="fh-scrim" aria-hidden="true"></div>
+
+  <div class="fh-lockup">
+    <span class="fh-eyebrow">Fisher Hill Association · White Plains, NY</span>
+    <h1 class="fh-title">Fisher&nbsp;Hill</h1>
+    <p class="fh-tag">A historic neighborhood, in photorealistic 3D — the Bronx River to downtown.</p>
+  </div>
+
+  <p class="fh-hint" aria-hidden="true"><span class="fh-d">Left-drag rotates · right-drag (or ⇧-drag) pans · scroll zooms</span><span class="fh-m">Drag to pan · pinch to zoom · buttons to rotate &amp; tilt</span></p>
+  <div class="fh-nav" role="group" aria-label="Map controls">
+    <button data-act="rot-l" type="button" aria-label="Rotate left">↺</button>
+    <button data-act="rot-r" type="button" aria-label="Rotate right">↻</button>
+    <button data-act="tilt-u" type="button" aria-label="Tilt up">▴</button>
+    <button data-act="tilt-d" type="button" aria-label="Tilt down">▾</button>
+    <button id="fh-recenter" type="button" aria-label="Recenter the view">◎</button>
+  </div>
+  <span class="fh-scroll" aria-hidden="true">scroll ↓</span>
+
+  <div class="fh-loading" id="fh-loading"><span class="fh-spin" aria-hidden="true"></span><span>Loading the 3D map…</span></div>
+  <div class="fh-fallback" id="fh-fallback"><div id="fh-fallback-msg"></div></div>
+</header>
+
+<main class="fh-wrap">
+  <p class="fh-kicker">About the neighborhood</p>
+  <h2 class="fh-h2">One of White Plains' historic close-in neighborhoods.</h2>
+  <p class="fh-lede">Fisher Hill is a historic neighborhood within walking distance of the central business district of White Plains, New York. Residential development began around 1900, and many of the large vintage homes from that era still define the neighborhood's character today. Fisher Hill is notably diverse in ethnicity, age, and income.</p>
+  <p class="fh-lede">The orange outline on the map traces the neighborhood's bounds — the Bronx River Parkway to the west, the downtown and White Plains Hospital edge to the northeast, and south past Mattison Park and Post Road School.</p>
+
+  <div class="fh-assoc">
+    <h3>Fisher Hill Association</h3>
+    <p>The neighborhood's residents' association.</p>
+    <ul>
+      <li><strong>Michael Dalton</strong>, President · <a href="tel:9144977236">914-497-7236</a></li>
+      <li><strong>Jonna Robbins</strong>, Vice President</li>
+      <li><strong>Jane Prout</strong>, Treasurer</li>
+    </ul>
+  </div>
+</main>
+
+<footer class="fh-foot">
+  Fisher Hill, White Plains, NY · Photorealistic 3D via Google Map Tiles &amp; CesiumJS.
+</footer>
+
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
+<script>
+/* ───────────────────────────────────────────────────────────────────────────
+   PASTE YOUR GOOGLE MAPS API KEY BETWEEN THE QUOTES BELOW.
+   It must be a browser key restricted to the Map Tiles API, with an HTTP-referrer
+   restriction that includes wherever this page is hosted
+   (e.g. https://never-nude.github.io/* ) plus http://localhost:8080/* for local tests.
+   ─────────────────────────────────────────────────────────────────────────── */
+const GOOGLE_MAPS_API_KEY = "AIzaSyBbt1tLWE9t_VGmGba_zInHC_yx_3LwUjI";
+
+/* Fisher Hill boundary (lng, lat) — verified against landmark anchors in Google Earth. */
+const FH_BOUNDARY = [
+  [-73.774416,41.023480],[-73.771133,41.025455],[-73.771697,41.028114],[-73.774277,41.027527],
+  [-73.774717,41.027563],[-73.775141,41.027717],[-73.775731,41.028332],[-73.777463,41.027292],
+  [-73.778472,41.026709],[-73.779411,41.025884],[-73.778477,41.025208],[-73.778354,41.025123],
+  [-73.781503,41.022282],[-73.781975,41.022104],[-73.782645,41.022011],[-73.782994,41.021849],
+  [-73.783273,41.021533],[-73.783751,41.020894],[-73.781379,41.019837],[-73.781975,41.019109],
+  [-73.781143,41.018736],[-73.781723,41.018008],[-73.780022,41.017235],[-73.780478,41.016640],
+  [-73.778413,41.015689],[-73.776610,41.018959]
+];
+
+/* Default hero camera (derived from a confirmed Google Earth framing). */
+const CAM = { lat:41.0131, lng:-73.7832, height:1050, heading:38, pitch:-28 };
+const BRAND = "#d65f22";
+
+(function(){
+  const loadingEl = document.getElementById("fh-loading");
+  const fbEl = document.getElementById("fh-fallback");
+  const fbMsg = document.getElementById("fh-fallback-msg");
+  function fail(msg){
+    if(loadingEl) loadingEl.hidden = true;
+    fbMsg.innerHTML = msg;
+    fbEl.classList.add("show");
+  }
+  if(typeof Cesium === "undefined"){ fail("The 3D engine failed to load. Check your connection and refresh."); return; }
+  if(!GOOGLE_MAPS_API_KEY){
+    fail("Add your Google Maps API key in <code>index.html</code> (the <code>GOOGLE_MAPS_API_KEY</code> line) to load the map. It also needs to be served from an allowed domain — see the key's referrer restrictions.");
+    return;
+  }
+
+  try { Cesium.Ion.defaultAccessToken = ""; } catch(e){}
+  let viewer;
+  try {
+    viewer = new Cesium.Viewer("cesiumContainer", {
+      globe:false, baseLayer:false, baseLayerPicker:false, geocoder:false, homeButton:false,
+      sceneModePicker:false, navigationHelpButton:false, animation:false, timeline:false,
+      fullscreenButton:false, infoBox:false, selectionIndicator:false
+    });
+  } catch(e){ fail("The map renderer could not start."); return; }
+
+  const scene = viewer.scene;
+  if(scene.globe) scene.globe.show = false;
+  scene.skyAtmosphere.show = true;
+
+  /* Controls.  Mouse: left-drag rotates, right-drag pans, wheel zooms.
+     Trackpad: drag rotates, Shift-drag pans, scroll zooms.
+     Touch: one-finger drag pans, pinch zooms, on-screen buttons rotate/tilt. */
+  const ctrl = scene.screenSpaceCameraController;
+  ctrl.enableRotate = true;
+  ctrl.enableTranslate = false;
+  ctrl.enableZoom = true;
+  ctrl.enableTilt = false;
+  ctrl.enableLook = false;
+  ctrl.zoomEventTypes = [ Cesium.CameraEventType.WHEEL, Cesium.CameraEventType.PINCH ];
+  var isTouch = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+  // Pan = Cesium's native navigation: right-drag + Shift-left-drag on desktop, one-finger drag on touch.
+  ctrl.rotateEventTypes = isTouch
+    ? [ Cesium.CameraEventType.LEFT_DRAG ]
+    : [ Cesium.CameraEventType.RIGHT_DRAG, { eventType: Cesium.CameraEventType.LEFT_DRAG, modifier: Cesium.KeyboardEventModifier.SHIFT } ];
+
+  // Centre we rotate/tilt around (the neighborhood) — used by the on-screen buttons and keys.
+  const ORBIT_CENTER = Cesium.Cartesian3.fromDegrees(-73.7787, 41.0228, 50);
+  const MIN_PITCH = Cesium.Math.toRadians(-85), MAX_PITCH = Cesium.Math.toRadians(-6);
+
+  // Press "c" to copy the current camera as the default CAM config (for tuning the hero view).
+  document.addEventListener("keydown", function(e){
+    if((e.key === "c" || e.key === "C") && !e.metaKey && !e.ctrlKey){
+      var cg = viewer.camera.positionCartographic;
+      var cfg = "const CAM = { lat:" + Cesium.Math.toDegrees(cg.latitude).toFixed(5) +
+        ", lng:" + Cesium.Math.toDegrees(cg.longitude).toFixed(5) +
+        ", height:" + Math.round(cg.height) +
+        ", heading:" + Cesium.Math.toDegrees(viewer.camera.heading).toFixed(1) +
+        ", pitch:" + Cesium.Math.toDegrees(viewer.camera.pitch).toFixed(1) + " };";
+      if(navigator.clipboard) navigator.clipboard.writeText(cfg);
+      if(window.console) console.log("Copied → " + cfg);
+    }
+  });
+
+  function setDefaultView(){
+    viewer.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(CAM.lng, CAM.lat, CAM.height),
+      orientation: { heading: Cesium.Math.toRadians(CAM.heading), pitch: Cesium.Math.toRadians(CAM.pitch), roll:0 }
+    });
+  }
+  setDefaultView();
+
+  // Recenter button.
+  var recenterBtn = document.getElementById("fh-recenter");
+  if(recenterBtn) recenterBtn.addEventListener("click", function(){ setDefaultView(); scene.requestRender(); });
+
+  // Orbit/rotate around the neighborhood centre.
+  function orbitBy(dh, dp){
+    viewer.camera.lookAtTransform(Cesium.Transforms.eastNorthUpToFixedFrame(ORBIT_CENTER));
+    var range = Cesium.Cartesian3.magnitude(viewer.camera.position);
+    var heading = viewer.camera.heading + dh;
+    var pitch = Cesium.Math.clamp(viewer.camera.pitch + dp, MIN_PITCH, MAX_PITCH);
+    viewer.camera.lookAt(ORBIT_CENTER, new Cesium.HeadingPitchRange(heading, pitch, range));
+    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+  }
+  // Orbit (rotate + tilt) on LEFT-drag — desktop/trackpad only; touch pans on drag and uses buttons.
+  // Drag sideways = rotate, up/down = tilt. Shift held = let native pan take the drag instead.
+  var shiftHeld = false, sDrag = false, sX = 0, sY = 0;
+  window.addEventListener("keydown", function(e){ if(e.key === "Shift") shiftHeld = true; });
+  window.addEventListener("keyup",   function(e){ if(e.key === "Shift") shiftHeld = false; });
+  scene.canvas.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+  if(!isTouch){
+    var dragH = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+    dragH.setInputAction(function(e){ if(!shiftHeld){ sDrag = true; sX = e.position.x; sY = e.position.y; } }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+    dragH.setInputAction(function(){ sDrag = false; }, Cesium.ScreenSpaceEventType.LEFT_UP);
+    dragH.setInputAction(function(e){
+      if(!sDrag || shiftHeld) return;
+      var dx = e.endPosition.x - sX, dy = e.endPosition.y - sY;
+      sX = e.endPosition.x; sY = e.endPosition.y;
+      orbitBy(dx * 0.005, -dy * 0.005);
+      scene.requestRender();
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+  }
+
+  // On-screen rotate / tilt buttons (click or hold).
+  function bindHold(sel, fn){
+    var el = document.querySelector(sel); if(!el) return;
+    var timer = null;
+    function start(ev){ ev.preventDefault(); if(timer) return; fn(); scene.requestRender(); timer = setInterval(function(){ fn(); scene.requestRender(); }, 45); }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    el.addEventListener("mousedown", start);
+    el.addEventListener("touchstart", start, { passive:false });
+    ["mouseup","mouseleave","touchend","touchcancel"].forEach(function(ev){ el.addEventListener(ev, stop); });
+  }
+  var STEP = Cesium.Math.toRadians(2);
+  bindHold('[data-act="rot-l"]',  function(){ orbitBy( STEP, 0); });
+  bindHold('[data-act="rot-r"]',  function(){ orbitBy(-STEP, 0); });
+  bindHold('[data-act="tilt-u"]', function(){ orbitBy(0,  STEP); });
+  bindHold('[data-act="tilt-d"]', function(){ orbitBy(0, -STEP); });
+
+  function loadTiles(){
+    const fn = Cesium.createGooglePhotorealistic3DTileset;
+    try { return Promise.resolve(fn(GOOGLE_MAPS_API_KEY)).catch(function(){ return fn({ key: GOOGLE_MAPS_API_KEY }); }); }
+    catch(e){ return Promise.resolve(fn({ key: GOOGLE_MAPS_API_KEY })); }
+  }
+
+  loadTiles().then(function(tileset){
+    scene.primitives.add(tileset);
+    setDefaultView();
+    if(loadingEl) loadingEl.hidden = true;
+
+    const flat = [];
+    FH_BOUNDARY.forEach(function(c){ flat.push(c[0], c[1]); });
+    const positions = Cesium.Cartesian3.fromDegreesArray(flat);
+    const fillColor = Cesium.Color.fromCssColorString("#bca7ee").withAlpha(0.15);  // light violet
+    const lineColor = Cesium.Color.fromCssColorString("#6c4fc2");                   // darker violet border
+    viewer.entities.add({ polygon:{ hierarchy:positions, material:fillColor,
+      classificationType:Cesium.ClassificationType.CESIUM_3D_TILE } });
+    viewer.entities.add({ polyline:{ positions:positions.concat([positions[0]]), width:4, material:lineColor,
+      clampToGround:true, classificationType:Cesium.ClassificationType.CESIUM_3D_TILE } });
+
+    // Nearby landmarks — show Fisher Hill's proximity to them.
+    const LANDMARKS = [
+      { name:"White Plains Hospital",     lat:41.02583, lng:-73.76931 },
+      { name:"Metro-North Station",       lat:41.03360, lng:-73.77010 },
+      { name:"White Plains Public Library", lat:41.03035, lng:-73.76998 },
+      { name:"City Hall",                 lat:41.03333, lng:-73.76555 },
+      { name:"Westchester County Center", lat:41.03694, lng:-73.77861 },
+      { name:"Post Road School",          lat:41.02031, lng:-73.77419 }
+    ];
+    LANDMARKS.forEach(function(L){
+      viewer.entities.add({
+        position: Cesium.Cartesian3.fromDegrees(L.lng, L.lat),
+        point: { pixelSize:9, color:lineColor, outlineColor:Cesium.Color.WHITE, outlineWidth:2,
+                 disableDepthTestDistance:Number.POSITIVE_INFINITY },
+        label: { text:L.name, font:'600 13px Inter, "Helvetica Neue", sans-serif',
+                 fillColor:Cesium.Color.WHITE, showBackground:true,
+                 backgroundColor:Cesium.Color.fromCssColorString("#241a3a").withAlpha(0.82),
+                 backgroundPadding:new Cesium.Cartesian2(7,4),
+                 verticalOrigin:Cesium.VerticalOrigin.BOTTOM,
+                 pixelOffset:new Cesium.Cartesian2(0,-12),
+                 disableDepthTestDistance:Number.POSITIVE_INFINITY,
+                 scaleByDistance:new Cesium.NearFarScalar(800, 1.0, 9000, 0.55) } });
+    });
+    scene.requestRender();
+  }).catch(function(err){
+    if(window.console) console.error("Fisher Hill 3D map:", err);
+    try { viewer.destroy(); } catch(e){}
+    fail("The map tiles could not load. Make sure billing is on, the Map Tiles API is enabled, and this page's address is allowed in the key's referrer restrictions.");
+  });
+})();
+</script>
+</body>
+</html>
