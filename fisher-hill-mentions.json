@@ -1,11 +1,34 @@
 {
-  "updated": "2026-06-03",
+  "updated": "2026-06-14",
   "source": "WPCNA (Council of Neighborhood Associations) meeting minutes — wp-cna.org/agendas",
   "scanned": [
     "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2003-10-26.pdf",
     "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20February%202026%20Meeting%20Minutes.pdf",
     "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%201-13-26.pdf",
-    "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2012-9-25.pdf"
+    "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2012-9-25.pdf",
+    "https://wp-cna.org/assets/docs/041426-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/cna-meeting-minutes-03-10-26.pdf",
+    "https://wp-cna.org/assets/docs/cna-february-2026-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/cna-meeting-minutes-1-13-26.pdf",
+    "https://wp-cna.org/assets/docs/cna-meeting-minutes-12-9-25.pdf",
+    "https://wp-cna.org/assets/docs/11-12-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/10-14-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/cna-meeting-minutes-9-9-25.pdf",
+    "https://wp-cna.org/assets/docs/6-10-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/05-13-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/04-08-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/02-11-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/1-14-25-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/12-10-24-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/11-12-24-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/10-08-24-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/091024-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/6-26-24-wpcna-meeting-agenda.pdf",
+    "https://wp-cna.org/assets/docs/05-07-24-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/04-09-24-cna-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/cna-03-12-24-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/cna-2-13-24-meeting-minutes.pdf",
+    "https://wp-cna.org/assets/docs/wpcna-bylaws.pdf"
   ],
   "mentions": [
     {
@@ -13,24 +36,185 @@
       "label": "February 10, 2026",
       "meeting": "CNA monthly meeting",
       "summary": "White Plains Hospital presented its expansion: renderings of the East Post Road parking garage, the 170 Maple Ave demolition, steel top-out under way with completion expected late 2027 — plus discussion of Longview Ave traffic at the Cancer Center. All of it sits on Fisher Hill's northeast edge.",
-      "terms": ["East Post Road", "White Plains Hospital", "Maple Ave", "Longview Ave"],
+      "terms": [
+        "East Post Road",
+        "White Plains Hospital",
+        "Maple Ave",
+        "Longview Ave"
+      ],
       "pdf": "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20February%202026%20Meeting%20Minutes.pdf"
+    },
+    {
+      "date": "2026-02-10",
+      "label": "February 10, 2026",
+      "meeting": "CNA meeting minutes",
+      "summary": "…expansion Groundbreaking May 5th, 2025 Putting up steel eight stories high. Final height will be 10 stories. A look back: 170 Maple Ave, December 18, 2025-new home to parking entrance Proposed WPH Campus Aerial View of entire WPH site Current Progress video (drone footage) o Milestones:  Currently WPH is about to start steel top-out.  Late summer 170 Maple Ave Demo Complete  Substantial Completion December…",
+      "terms": [
+        "Post Road",
+        "Longview Ave",
+        "Maple Ave"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/cna-february-2026-meeting-minutes.pdf",
+      "auto": true
     },
     {
       "date": "2026-01-13",
       "label": "January 13, 2026",
       "meeting": "CNA monthly meeting",
       "summary": "The hospital's project pipeline includes a new Post Road parking facility and possible workforce housing; the city's Building Department also has a report coming on public and private parking garages.",
-      "terms": ["Post Road", "White Plains Hospital"],
+      "terms": [
+        "Post Road",
+        "White Plains Hospital"
+      ],
       "pdf": "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%201-13-26.pdf"
+    },
+    {
+      "date": "2026-01-13",
+      "label": "January 13, 2026",
+      "meeting": "CNA meeting minutes",
+      "summary": "…we can raise the dues to $50. He believes we need more associations to be a part of the CNA. 3. Meeting Topics fi fl a. White Plains Hospital – Projects Update i. Current Project under construction ii. Post Road Parking Facility & Workforce Housing -Mike Dalton has reached out to Sr. VP French at WP Hospital. VP French said the Hospital would be glad to present an update to the CNA members. M. Dalton…",
+      "terms": [
+        "Post Road",
+        "White Plains Hospital"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/cna-meeting-minutes-1-13-26.pdf",
+      "auto": true
     },
     {
       "date": "2025-12-09",
       "label": "December 9, 2025",
       "meeting": "CNA annual election",
       "summary": "Fisher Hill was named in good standing and voted in the CNA's 2026 board election — Fisher Hill Association president Michael Dalton was elected CNA President. Mayor-elect Brasch also previewed his priorities for the city.",
-      "terms": ["Fisher Hill"],
+      "terms": [
+        "Fisher Hill"
+      ],
       "pdf": "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2012-9-25.pdf"
+    },
+    {
+      "date": "2025-12-09",
+      "label": "December 9, 2025",
+      "meeting": "CNA meeting minutes",
+      "summary": "…annual dues and were therefore eligible to vote in the election of CNA Executive Board members: Carhart, Gedney Farms, Fisher Hill, North Broadway, Highlands, Rosedale, North St, Battle Hill, Gedney Meadow, Stewart Ross & Old Oak Ridge. 3. Pres. Sanchez introduced Mark Lalloo (of Battle Hill) who would act as the CNA election manager and be responsible for counting the election votes. The slate of…",
+      "terms": [
+        "Fisher Hill"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/cna-meeting-minutes-12-9-25.pdf",
+      "auto": true
+    },
+    {
+      "date": "2025-11-12",
+      "label": "November 12, 2025",
+      "meeting": "CNA meeting minutes",
+      "summary": "…Gomez. Pres. Sanchez asked C. Gomez to update the CNA attendees on the status of the Galleria redevelopment project and the White Plains Hospital expansion project. 9. Commissioner Gomez explained that the “Draft Environment Impact Statement” (DEIS) submitted by the applicant (the developer) was reviewed and accepted as “complete” by the Common Council. The DEIS is based on a “conceptual development plan”…",
+      "terms": [
+        "White Plains Hospital"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/11-12-25-cna-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "2025-10-14",
+      "label": "October 14, 2025",
+      "meeting": "CNA meeting minutes",
+      "summary": "…Power Plant…and would not welcome in any way re-opening the nuclear plant. 13. M. Dalton described the 3 years that the Fisher Hill neighborhood in White Plains has endured as Con Ed and its sub-contractors replaced the 100-year-old natural gas pipeline infrastructure in the neighborhood…from the meters in our homes to the lateral gas piping from our homes to gas shut off valves in our tree strips…",
+      "terms": [
+        "Fisher Hill"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/10-14-25-cna-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "2025-09-09",
+      "label": "September 9, 2025",
+      "meeting": "CNA meeting minutes",
+      "summary": "…to address the attendees first. 2. Mr. Lolis explained that he has lived in White Plains all his life. He grew up in the Fisher Hill neighborhood on Highland Ave and later in Gedney Farms. His Dad ran a Texaco station on East Post Road. Mr. Lolis worked for the W.P. Building Dept. and was responsible for implementing the City’s first city-wide computer system. He was responsible for introducing a city-wide…",
+      "terms": [
+        "Fisher Hill",
+        "Post Road"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/cna-meeting-minutes-9-9-25.pdf",
+      "auto": true
+    },
+    {
+      "date": "2025-04-08",
+      "label": "April 8, 2025",
+      "meeting": "CNA meeting minutes",
+      "summary": "…that the A/V equipment is fully operational prior to the start of the Workshop. 28. E. Berger explained that a part of South Lexington is in the Highlands neighborhood. She suggested that someone from the Highlands neighborhood Association should contact residents living in the part of South Lexington that is part of the Highlands neighborhood. 29. E. Berger suggested that CNA members should reach…",
+      "terms": [
+        "S Lexington Ave"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/04-08-25-cna-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "2025-01-14",
+      "label": "January 14, 2025",
+      "meeting": "CNA meeting minutes",
+      "summary": "…suggested that the CNA invite a guest speaker to discuss marijuana dispensaries. • It was suggested that the CNA invite White Plains Hospital to provide an update on their new building. • J. Lee suggested that an update on the Farrell Estates Development project would be a good topic for a CNA meeting. 7. B. Friscia said that he had spoken with John Sheehan regarding the Farrell Estates Development.…",
+      "terms": [
+        "White Plains Hospital"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/1-14-25-cna-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "2024-12-10",
+      "label": "December 10, 2024",
+      "meeting": "CNA meeting minutes",
+      "summary": "…have higher speed limits posted. The City does not control the speed limit on streets administrated by the County…like Post Rd. • White Plains will be installing “speed cameras” in School Zones and “school bus arm cameras” on School Buses. These cameras will be used to issue tickets the drivers exceeding a school zone speed limit or not stopping when a school bus has stopped and is letting children…",
+      "terms": [
+        "Post Road"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/12-10-24-cna-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "2024-06-26",
+      "label": "June 26, 2024",
+      "meeting": "CNA meeting minutes",
+      "summary": "…Vicki Presser Common Counsil Member Richard Payne 1. (7pm-7:05pm) Greeting and Call Meeting to Order 2. (7:05pm-8:15pm) White Plains Hospital Update Special Guests: • Dawn French (Senior Vice President Marketing & Community OutreachWhite Plains Hospital) • Joshua Strugatz (Chief Campus Transformation Officer) • Dr. James Peacock (Cardiac Electrophysiologist and Physician Clinical Project Lead) • Vicki…",
+      "terms": [
+        "Fisher Hill",
+        "Post Road",
+        "White Plains Hospital",
+        "Maple Ave"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/6-26-24-wpcna-meeting-agenda.pdf",
+      "auto": true
+    },
+    {
+      "date": "2024-03-12",
+      "label": "March 12, 2024",
+      "meeting": "CNA meeting minutes",
+      "summary": "…fund? d. Where is affordable housing be built? 21. The question was asked, “as the largest employer in White Plains…has the White Plains Hospital been in discussion with the City to build “work force housing” for hospital employees?” Several years ago, the Hospital and the City pursued an “eminent domain” strategy to take control of properties on the west side of Post Road across from the Hospital. The…",
+      "terms": [
+        "Post Road",
+        "White Plains Hospital"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/cna-03-12-24-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "2024-02-13",
+      "label": "February 13, 2024",
+      "meeting": "CNA meeting minutes",
+      "summary": "…order by President Sanchez 2. Michael Sanchez introduced the meeting’s topic: Watershed Management and the effects of the Bronx River and Mamaroneck River flooding in our neighborhoods. Michael introduced our guest speakers from the Office of County Executive in Westchester County: a. Aviva Meyer – Director of Policy Programs, Health & Infrastructure b. Dave Kvinge – Assistant Commissioner Westchester…",
+      "terms": [
+        "Bronx River Pkwy"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/cna-2-13-24-meeting-minutes.pdf",
+      "auto": true
+    },
+    {
+      "date": "",
+      "label": "wpcna-bylaws.pdf",
+      "meeting": "CNA meeting minutes",
+      "summary": "…meetings and at such other times as determined by the Executive Committee. The Treasurer shall provide the full current bank statement to the President and Vice-Presidents on a quarterly basis on a schedule set forth by the President. The Treasurer will issue dues notices as necessary. 7. The Executive Committee shall set the dates, times and place of meetings and provide an agenda for each meeting.…",
+      "terms": [
+        "Bank St"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/wpcna-bylaws.pdf",
+      "auto": true
     }
   ]
 }
