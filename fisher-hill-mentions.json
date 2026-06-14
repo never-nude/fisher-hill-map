@@ -1,0 +1,36 @@
+{
+  "updated": "2026-06-03",
+  "source": "WPCNA (Council of Neighborhood Associations) meeting minutes — wp-cna.org/agendas",
+  "scanned": [
+    "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2003-10-26.pdf",
+    "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20February%202026%20Meeting%20Minutes.pdf",
+    "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%201-13-26.pdf",
+    "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2012-9-25.pdf"
+  ],
+  "mentions": [
+    {
+      "date": "2026-02-10",
+      "label": "February 10, 2026",
+      "meeting": "CNA monthly meeting",
+      "summary": "White Plains Hospital presented its expansion: renderings of the East Post Road parking garage, the 170 Maple Ave demolition, steel top-out under way with completion expected late 2027 — plus discussion of Longview Ave traffic at the Cancer Center. All of it sits on Fisher Hill's northeast edge.",
+      "terms": ["East Post Road", "White Plains Hospital", "Maple Ave", "Longview Ave"],
+      "pdf": "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20February%202026%20Meeting%20Minutes.pdf"
+    },
+    {
+      "date": "2026-01-13",
+      "label": "January 13, 2026",
+      "meeting": "CNA monthly meeting",
+      "summary": "The hospital's project pipeline includes a new Post Road parking facility and possible workforce housing; the city's Building Department also has a report coming on public and private parking garages.",
+      "terms": ["Post Road", "White Plains Hospital"],
+      "pdf": "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%201-13-26.pdf"
+    },
+    {
+      "date": "2025-12-09",
+      "label": "December 9, 2025",
+      "meeting": "CNA annual election",
+      "summary": "Fisher Hill was named in good standing and voted in the CNA's 2026 board election — Fisher Hill Association president Michael Dalton was elected CNA President. Mayor-elect Brasch also previewed his priorities for the city.",
+      "terms": ["Fisher Hill"],
+      "pdf": "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2012-9-25.pdf"
+    }
+  ]
+}

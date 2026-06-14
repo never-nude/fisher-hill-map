@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css">
 <style>
-  :root{ --brand:#d65f22; --ink:#181818; --muted:#6a6a6a; --line:#e8e2dc; --soft:#fff5ef; }
+  :root{ --brand:#7c3aed; --ink:#181818; --muted:#6a6a6a; --line:#e7e3ef; --soft:#f5f1ff; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
   body{ font-family:"Inter",system-ui,sans-serif; color:var(--ink); background:#fff; }
@@ -64,6 +64,17 @@
   .fh-assoc a{ color:var(--brand); text-decoration:none; } .fh-assoc a:hover{ text-decoration:underline; }
   .fh-foot{ border-top:1px solid var(--line); padding:26px clamp(20px,5vw,32px); text-align:center; color:var(--muted); font-size:13px; }
 
+  /* "At recent meetings" — rendered from fisher-hill-mentions.json */
+  .fh-minutes{ margin-top:56px; }
+  .fh-minnote{ font-size:13.5px; color:var(--muted); margin:0 0 18px; }
+  .fh-minnote a{ color:var(--brand); }
+  .fh-mins{ list-style:none; margin:0; padding:0; display:grid; gap:14px; }
+  .fh-mins li{ border:1px solid var(--line); border-left:4px solid #7c3aed; background:#fff; padding:14px 18px; }
+  .fh-min-date{ display:block; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#7c3aed; }
+  .fh-mins p{ margin:6px 0 8px; font-size:15px; line-height:1.55; color:#2b2b2b; }
+  .fh-mins a{ color:var(--brand); font-weight:600; font-size:13.5px; text-decoration:none; }
+  .fh-mins a:hover{ text-decoration:underline; }
+
   /* Pointer-aware hint + mobile sizing */
   .fh-m{ display:none; }
   @media (pointer:coarse){ .fh-d{ display:none; } .fh-m{ display:inline; } }
@@ -107,7 +118,14 @@
   <p class="fh-kicker">About the neighborhood</p>
   <h2 class="fh-h2">One of White Plains' historic close-in neighborhoods.</h2>
   <p class="fh-lede">Fisher Hill is a historic neighborhood within walking distance of the central business district of White Plains, New York. Residential development began around 1900, and many of the large vintage homes from that era still define the neighborhood's character today. Fisher Hill is notably diverse in ethnicity, age, and income.</p>
-  <p class="fh-lede">The orange outline on the map traces the neighborhood's bounds — the Bronx River Parkway to the west, the downtown and White Plains Hospital edge to the northeast, and south past Mattison Park and Post Road School.</p>
+  <p class="fh-lede">The violet outline on the map traces the neighborhood's bounds — the Bronx River Parkway to the west and Post Road to the east, with downtown and White Plains Hospital just beyond the northeast corner.</p>
+
+  <section class="fh-minutes" id="fh-minutes" hidden>
+    <p class="fh-kicker">At recent meetings</p>
+    <h2 class="fh-h2">Fisher Hill on the agenda.</h2>
+    <p class="fh-minnote">Items touching Fisher Hill or its boundary streets, found automatically in <a href="https://wp-cna.org/agendas" rel="external noopener">WPCNA meeting minutes</a>.</p>
+    <ol class="fh-mins" id="fh-mins"></ol>
+  </section>
 
   <div class="fh-assoc">
     <h3>Fisher Hill Association</h3>
@@ -147,7 +165,7 @@ const FH_BOUNDARY = [
 
 /* Default hero camera (derived from a confirmed Google Earth framing). */
 const CAM = { lat:41.0131, lng:-73.7832, height:1050, heading:38, pitch:-28 };
-const BRAND = "#d65f22";
+const BRAND = "#7c3aed";
 
 (function(){
   const loadingEl = document.getElementById("fh-loading");
@@ -283,7 +301,7 @@ const BRAND = "#d65f22";
     FH_BOUNDARY.forEach(function(c){ flat.push(c[0], c[1]); });
     const positions = Cesium.Cartesian3.fromDegreesArray(flat);
     const fillColor = Cesium.Color.fromCssColorString("#bca7ee").withAlpha(0.15);  // light violet
-    const lineColor = Cesium.Color.fromCssColorString("#6c4fc2");                   // darker violet border
+    const lineColor = Cesium.Color.fromCssColorString("#7c3aed");                   // darker violet border
     viewer.entities.add({ polygon:{ hierarchy:positions, material:fillColor,
       classificationType:Cesium.ClassificationType.CESIUM_3D_TILE } });
     viewer.entities.add({ polyline:{ positions:positions.concat([positions[0]]), width:4, material:lineColor,
@@ -318,6 +336,37 @@ const BRAND = "#d65f22";
     try { viewer.destroy(); } catch(e){}
     fail("The map tiles could not load. Make sure billing is on, the Map Tiles API is enabled, and this page's address is allowed in the key's referrer restrictions.");
   });
+})();
+
+/* "At recent meetings" — render fisher-hill-mentions.json if present.
+   Independent of the map; if the fetch fails the section simply stays hidden. */
+(function(){
+  fetch("fisher-hill-mentions.json")
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(data){
+      if(!data || !Array.isArray(data.mentions) || !data.mentions.length) return;
+      var list = document.getElementById("fh-mins");
+      data.mentions.slice(0, 6).forEach(function(m){
+        var li = document.createElement("li");
+        var date = document.createElement("span");
+        date.className = "fh-min-date";
+        date.textContent = m.label || m.date || "";
+        var p = document.createElement("p");
+        p.textContent = m.summary || "";
+        li.appendChild(date);
+        li.appendChild(p);
+        if(m.pdf){
+          var a = document.createElement("a");
+          a.href = m.pdf;
+          a.rel = "external noopener";
+          a.textContent = "Read the minutes →";
+          li.appendChild(a);
+        }
+        list.appendChild(li);
+      });
+      document.getElementById("fh-minutes").hidden = false;
+    })
+    .catch(function(){ /* leave hidden */ });
 })();
 </script>
 </body>
