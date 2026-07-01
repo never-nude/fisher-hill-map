@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24",
+  "updated": "2026-07-01",
   "source": "WPCNA (Council of Neighborhood Associations) meeting minutes — wp-cna.org/agendas",
   "scanned": [
     "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2003-10-26.pdf",
@@ -28,9 +28,21 @@
     "https://wp-cna.org/assets/docs/04-09-24-cna-meeting-minutes.pdf",
     "https://wp-cna.org/assets/docs/cna-03-12-24-meeting-minutes.pdf",
     "https://wp-cna.org/assets/docs/cna-2-13-24-meeting-minutes.pdf",
-    "https://wp-cna.org/assets/docs/wpcna-bylaws.pdf"
+    "https://wp-cna.org/assets/docs/wpcna-bylaws.pdf",
+    "https://wp-cna.org/assets/docs/051226%20CNA%20Meeting%20MInutes.pdf"
   ],
   "mentions": [
+    {
+      "date": "2026-05-12",
+      "label": "May 12, 2026",
+      "meeting": "CNA meeting minutes",
+      "summary": "…“prototype” website to be completed by the June 9th meeting. 5. Treasurer’s report – Tom Osbeck  Gedney Farms, North Street, Fisher Hill & Oak Ridge have paid their $50 dues for 2026.  GoDaddy’s $259.13 annual website hosting fee was paid on 2/6/26.  The $300 WP Scholarship Award was paid on 4/24/26.  The current bank account balance at Key Bank is $1261.21 An important reminder…. The CNA voted in February…",
+      "terms": [
+        "Fisher Hill"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/051226%20CNA%20Meeting%20MInutes.pdf",
+      "auto": true
+    },
     {
       "date": "2026-02-10",
       "label": "February 10, 2026",
