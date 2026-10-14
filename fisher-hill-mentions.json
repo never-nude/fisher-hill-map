@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07",
+  "updated": "2026-10-14",
   "source": "WPCNA (Council of Neighborhood Associations) meeting minutes — wp-cna.org/agendas",
   "scanned": [
     "https://img1.wsimg.com/blobby/go/9af9db1d-be96-4dfe-bdfb-bcff6ea7f7c0/CNA%20Meeting%20Minutes%2003-10-26.pdf",
@@ -29,9 +29,21 @@
     "https://wp-cna.org/assets/docs/cna-03-12-24-meeting-minutes.pdf",
     "https://wp-cna.org/assets/docs/cna-2-13-24-meeting-minutes.pdf",
     "https://wp-cna.org/assets/docs/wpcna-bylaws.pdf",
-    "https://wp-cna.org/assets/docs/051226%20CNA%20Meeting%20MInutes.pdf"
+    "https://wp-cna.org/assets/docs/051226%20CNA%20Meeting%20MInutes.pdf",
+    "https://wp-cna.org/assets/docs/090826%20CNA%20Meeting%20Minutes.pdf"
   ],
   "mentions": [
+    {
+      "date": "2026-09-08",
+      "label": "September 8, 2026",
+      "meeting": "CNA meeting minutes",
+      "summary": "…recommended a one pager that can go on the website for home owners and home builders. 2. Treasurer’s Report – Tom Osbeck a. Bank Statement -$1251.21 Balance b. Current paid up Neighborhoods -Gedney -Fisher -North St -Old Oak Ridge 3. Proposal to hold a CNA New Membership Event in October a. Host a social event at Hudson Grill (or other venue) b. Invite neighborhood leaders who are not CNA members to meet…",
+      "terms": [
+        "Bank St"
+      ],
+      "pdf": "https://wp-cna.org/assets/docs/090826%20CNA%20Meeting%20Minutes.pdf",
+      "auto": true
+    },
     {
       "date": "2026-05-12",
       "label": "May 12, 2026",
